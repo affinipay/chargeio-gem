@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+irb = RUBY_PLATFORM =~ /(:?mswin|mingw)/ ? 'irb.bat' : 'irb'
+
+#lib_dir = File.dirname(File.expand_path(__FILE__))
+#$: << lib_dir if $0 == __FILE__
+
+libpaths = "-I lib -I #{File.dirname(__FILE__) + '/../lib'}"
+requires =  "-r irb/completion -r net-http-spy -r chargeio"
+puts "Loading chargeio gem"
+exec "#{irb} #{libpaths} #{requires} --simple-prompt"

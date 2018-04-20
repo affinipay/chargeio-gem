@@ -165,11 +165,6 @@ describe "Account" do
       t.errors.present?.should be true
       t.errors['method.cvv'].should == [ 'Card code is invalid' ]
     end
-    it 'should return card_cvv_incorrect' do
-      t = @gateway.authorize(34, :method => @card_params.merge(:number => '4000000000000101'))
-      t.errors.present?.should be true
-      t.errors['base'].should == [ 'Card code is incorrect' ]
-    end
   end
 
   describe 'fail on card name' do
@@ -252,51 +247,6 @@ describe "Account" do
       t = @gateway.authorize(34, :method => @card_params.merge(:country => 'ZZ'))
       t.errors.present?.should be true
       t.errors['method.country'].should == [ 'Country is invalid' ]
-    end
-  end
-
-  describe 'processing failures' do
-    it 'should return card_declined' do
-      t = @gateway.authorize(34, :method => @card_params.merge(:number => '4000000000000002'))
-      t.errors.present?.should be true
-      t.errors['base'].should == [ 'Card was declined' ]
-    end
-    it 'should return card_address_check_failed' do
-      t = @gateway.authorize(34, :method => @card_params.merge(:number => '4000000000000010'))
-      t.errors.present?.should be true
-      t.errors['base'].should == [ 'Address verification failed' ]
-    end
-    it 'should return card_declined_processing_error' do
-      t = @gateway.authorize(34, :method => @card_params.merge(:number => '4000000000000119'))
-      t.errors.present?.should be true
-      t.errors['base'].should == [ 'Card was declined due to a processing error' ]
-    end
-    it 'should return card_declined_insufficient_funds' do
-      t = @gateway.authorize(34, :method => @card_params.merge(:number => '4000000000000044'))
-      t.errors.present?.should be true
-      t.errors['base'].should == [ 'Card was declined due to insufficient funds' ]
-    end
-    it 'should return card_declined_limit_exceeded' do
-      t = @gateway.authorize(34, :method => @card_params.merge(:number => '4000000000000051'))
-      t.errors.present?.should be true
-      t.errors['base'].should == [ 'Card was declined due to limits exceeded' ]
-    end
-    it 'should return card_declined_hold' do
-      t = @gateway.authorize(34, :method => @card_params.merge(:number => '4000000000000127'))
-      t.errors.present?.should be true
-      t.errors['base'].should == [ 'Card was declined' ]
-    end
-    it 'should return card_type_not_accepted' do
-      t = @gateway.authorize(34, :method => @card_params.merge(:number => '4000000000000135'))
-      t.errors.present?.should be true
-      t.errors['base'].should == [ 'Card type is not accepted' ]
-    end
-    it 'should raise a card processing exception' do
-      expect { @gateway.authorize(34, :method => @card_params.merge(:number => '4000000000000143')) }.to raise_exception { |ex|
-        ex.should be_a(ChargeIO::ServerError)
-        ex.code.should == 'card_processing_error'
-        ex.entity_id.should_not be_nil
-      }
     end
   end
 
@@ -470,4 +420,3 @@ describe "Account" do
     end
   end
 end
-

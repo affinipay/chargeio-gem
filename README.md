@@ -3,8 +3,7 @@ chargeio-gem
 
 Ruby gem to access the chargeIO gateway
 
-Installation
------------
+## Installation
 
 To use the library in your application, add the following to your Gemfile:
 
@@ -45,14 +44,12 @@ perform the charge:
     token_id = ...
     charge = gateway.charge(amount, :method => token_id)
 
-Documentation
------------
+
+## Documentation
 
 The latest ChargeIO API documentation is available at https://developers.affinipay.com/reference/api.html#PaymentGatewayAPI.
 
-
-Development
------------
+## Development
 
 To successfully run tests, you must have an AffiniPay merchant account that matches the following configuration:
 -   At least one test-mode ACH _and_ one test-mode credit account
@@ -79,3 +76,6 @@ Where `<path_to_spec.rb>` is one of the following:
 -   gateway_spec.rb
 -   token_spec.rb
 -   transaction_spec.rb
+
+## License
+  [MIT](./LICENSE.txt) © AffiniPay LLC

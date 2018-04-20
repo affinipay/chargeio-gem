@@ -43,15 +43,33 @@ class ChargeIO::Gateway
     process_response(ChargeIO::Merchant, response)
   end
 
+  def patch_merchant(params={})
+    merchant_json = params.to_json
+    response = patch(:merchant, nil, merchant_json)
+    process_response(ChargeIO::Merchant, response)
+  end
+
   def update_merchant_account(account_id, params)
     account_json = params.to_json
     response = put(:accounts, account_id, account_json)
     process_response(ChargeIO::MerchantAccount, response)
   end
 
+  def patch_merchant_account(account_id, params)
+    account_json = params.to_json
+    response = patch(:accounts, account_id, account_json)
+    process_response(ChargeIO::MerchantAccount, response)
+  end
+
   def update_ach_account(account_id, params)
     account_json = params.to_json
     response = put('ach-accounts', account_id, account_json)
+    process_response(ChargeIO::AchAccount, response)
+  end
+
+  def patch_ach_account(account_id, params)
+    account_json = params.to_json
+    response = patch('ach-accounts', account_id, account_json)
     process_response(ChargeIO::AchAccount, response)
   end
 

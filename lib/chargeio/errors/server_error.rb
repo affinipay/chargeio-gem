@@ -1,5 +1,5 @@
 module ChargeIO
-  class ServerError < StandardError
+  class ServerError < Error
     attr_accessor :code
     attr_accessor :entity_id
 

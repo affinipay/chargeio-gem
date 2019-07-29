@@ -1,6 +1,6 @@
 module ChargeIO
 
-  class ResourceNotFound < StandardError
+  class ResourceNotFound < Error
     attr_accessor :resource_id
 
     def initialize(resource_id)

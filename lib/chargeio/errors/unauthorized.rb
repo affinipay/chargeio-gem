@@ -1,5 +1,5 @@
 module ChargeIO
-  class Unauthorized < StandardError
+  class Unauthorized < Error
     attr_accessor :entity_id
 
     def initialize(message, entity_id=nil)
